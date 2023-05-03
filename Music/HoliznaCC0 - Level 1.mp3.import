@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HoliznaCC0 - Level 1.mp3-eb8857c5d9e341333da7042d615a3ae2.mp3str"
+
+[deps]
+
+source_file="res://Music/HoliznaCC0 - Level 1.mp3"
+dest_files=[ "res://.import/HoliznaCC0 - Level 1.mp3-eb8857c5d9e341333da7042d615a3ae2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

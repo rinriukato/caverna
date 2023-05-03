@@ -1,0 +1,165 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Art/Tiles/tiles.png" type="Texture" id=1]
+[ext_resource path="res://Sign.gd" type="Script" id=2]
+[ext_resource path="res://Font/ResoledBold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Sounds/Beep.wav" type="AudioStream" id=4]
+[ext_resource path="res://Art/UI/icons-keyboard-16x16-1bit-ansdor.png" type="Texture" id=5]
+
+[sub_resource type="Theme" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Textbox/PopupDialog/RichTextLabel:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "textscroll"
+length = 0.75
+step = 0.75
+tracks/0/type = "value"
+tracks/0/path = NodePath("Textbox/PopupDialog/RichTextLabel:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, false ]
+}
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.5192
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -17 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "hovering"
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -17 ), Vector2( 0, -16.5 ) ]
+}
+
+[node name="Sign" type="Sprite"]
+scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 160, 97, 7, 7 )
+script = ExtResource( 2 )
+
+[node name="Textbox" type="CanvasLayer" parent="."]
+
+[node name="PopupDialog" type="PopupDialog" parent="Textbox"]
+visible = true
+anchor_right = 1.0
+margin_bottom = 125.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Textbox/PopupDialog"]
+margin_left = 10.0
+margin_top = 20.0
+margin_right = 1010.0
+margin_bottom = 100.0
+theme = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center]This is a test, this text should not appear. Please contact nintendo for support if this appears."
+visible_characters = 0
+percent_visible = 0.0
+text = "This is a test, this text should not appear. Please contact nintendo for support if this appears."
+
+[node name="Textscroll" type="AnimationPlayer" parent="Textbox"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 3 )
+anims/textscroll = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Sound Effects"
+
+[node name="HoveringSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -17 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 80, 64, 16, 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HoveringSprite"]
+autoplay = "hovering"
+anims/RESET = SubResource( 7 )
+anims/hovering = SubResource( 8 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

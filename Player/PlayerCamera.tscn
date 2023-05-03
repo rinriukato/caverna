@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Player/PlayerCamera.gd" type="Script" id=1]
+
+[node name="PlayerCamera" type="Camera2D"]
+current = true
+script = ExtResource( 1 )
+NOISE_SHAKE_SPEED = 12.0
+NOISE_SHAKE_STRENGTH = 15.0
