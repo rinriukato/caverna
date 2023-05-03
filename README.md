@@ -15,7 +15,9 @@ This project does use assets under the Creative Commons, therefore here the main
 
 ### Game assets
 1-bit UI elements by [Batuhan Karagöl](https://andelrodis.itch.io/)
+
 Hooded Protagonist by [Penzilla](https://penzilla.itch.io/)
+
 Adve Tileset by [egordorichev](https://egordorichev.itch.io/)
 
 ### Music
