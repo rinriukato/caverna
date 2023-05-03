@@ -1,4 +1,5 @@
 # Caverna
+![Example image](https://cdn.discordapp.com/attachments/1095538275806097458/1095538476134453268/image.png)
 
 Caverna is a 2D platformer created using the Godot engine. This project mainly serves as a way for me to learn the basic fundamentals of the Godot engine and to learn some game design principles. 
 
